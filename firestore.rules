@@ -1,0 +1,92 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isDonor() {
+      return isSignedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'donor';
+    }
+
+    function isVerifiedNgo() {
+      return isSignedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ngo'
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.verificationStatus == 'verified';
+    }
+
+    // User profiles
+    match /users/{userId} {
+
+      allow create: if isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.uid == userId
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role in ['donor', 'ngo']
+        && request.resource.data.verificationStatus ==
+          (request.resource.data.role == 'ngo' ? 'pending' : 'not_required');
+
+      allow read: if isSignedIn()
+        && request.auth.uid == userId;
+
+      // Profile changes are disabled for now.
+      allow update, delete: if false;
+    }
+
+    // Public food listings
+    match /donations/{donationId} {
+
+      allow read: if resource.data.status == 'available'
+        || (isSignedIn()
+          && resource.data.donorId == request.auth.uid)
+        || (isSignedIn()
+          && resource.data.assignedNgoId == request.auth.uid);
+
+      allow create: if isDonor()
+        && request.resource.data.donorId == request.auth.uid
+        && request.resource.data.status == 'available'
+        && request.resource.data.foodName is string
+        && request.resource.data.category is string
+        && request.resource.data.quantity is number
+        && request.resource.data.quantity > 0
+        && request.resource.data.pickupArea is string
+        && request.resource.data.keys().hasOnly([
+          'foodName',
+          'category',
+          'quantity',
+          'preparedAt',
+          'pickupDeadline',
+          'storageMethod',
+          'pickupArea',
+          'status',
+          'foodSafetyStatus',
+          'donorId',
+          'createdAt'
+        ]);
+
+      // Workflow updates will be enabled with verified NGO controls.
+      allow update, delete: if false;
+    }
+
+    // Private donor contact details
+    match /donationPrivate/{donationId} {
+
+      allow read: if isSignedIn()
+        && (
+          resource.data.donorId == request.auth.uid
+          || get(/databases/$(database)/documents/donations/$(donationId)).data.assignedNgoId == request.auth.uid
+        );
+
+      allow create: if isDonor()
+        && request.resource.data.donorId == request.auth.uid
+        && exists(/databases/$(database)/documents/donations/$(donationId))
+        && get(/databases/$(database)/documents/donations/$(donationId)).data.donorId == request.auth.uid;
+
+      allow update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AnnSetu connects surplus food donors with verified NGOs to reduce food waste.">
+  <title>AnnSetu | Bridging Food, Ending Hunger</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">🌾</span>
+      <span>AnnSetu</span>
+    </a>
+    
+    <nav>
+      <a href="#about">About</a>
+      <a href="#donate">Donate Food</a>
+      <a href="#listings">Food Board</a>
+      <span id="userInfo" hidden></span>
+      <button id="authOpen" type="button">Sign In</button>
+      <button id="logoutBtn" type="button" hidden>Sign Out</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">FOOD RESCUE • SMARTER CONNECTIONS</p>
+        <h1>Good Food Deserves<br>Another Chance.</h1>
+        <p>
+          Connecting surplus food donors with verified organisations
+          to reduce waste and fight hunger.
+        </p>
+        <a class="button" href="#donate">Share Surplus Food</a>
+      </div>
+
+      <img
+        src="assets/annsetu-hero.png"
+        alt="AnnSetu volunteers sharing surplus food with the community"
+        class="hero-image"
+        >
+    </section>
+    <!-- Message from Our Young Innovators -->
+<section class="student-messages">
+  <div class="container">
+    <h2>Message from Our Young Innovators</h2>
+    <p class="section-subtitle">
+      Young minds. Meaningful ideas. A better tomorrow.
+    </p>
+
+    <div class="student-message-grid">
+
+      <div class="student-message-card">
+        <img src="assets/sahibdeep.jpeg"
+             alt="Sahibdeep Singh">
+        <div>
+          <h3>Sahibdeep Singh</h3>
+          <span>Class 10th</span>
+          <p>
+            "Through AnnSetu, I learned how technology can
+            solve real social problems. It inspires me to use
+            my skills to reduce food waste and help people in need."
+          </p>
+        </div>
+      </div>
+
+      <div class="student-message-card">
+        <img src="assets/gurveer.jpeg"
+             alt="Gurveer Singh">
+        <div>
+          <h3>Gurveer Singh</h3>
+          <span>Class 10th</span>
+          <p>
+            "AnnSetu is more than a school project. It is our
+            step towards a kinder society where surplus food
+            reaches people who need it."
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <section id="about" class="section">
+      <h2>Our Impact</h2>
+
+      <div class="stats">
+        <div>
+          <strong id="statDonations">0</strong>
+          <span>Donations</span>
+        </div>
+
+        <div>
+          <strong id="statRescued">0</strong>
+          <span>Rescues completed</span>
+        </div>
+
+      <div>
+      <strong id="statMeals">0</strong>
+      <span>Meal portions listed</span>
+    </div>
+  </div>
+</section>
+
+    <section id="donate" class="section">
+      <h2>Share Surplus Food</h2>
+      <p>Help good food reach organisations that can distribute it responsibly.</p>
+      <div id="ngoStatusMessage" class="empty-state" hidden></div>
+      <form id="donationForm">
+        <label>Food name
+          <input name="foodName" required maxlength="100">
+        </label>
+
+        <div class="form-row">
+  <label>
+    Quantity
+    <input
+      name="quantity"
+      type="number"
+      min="1"
+      step="0.01"
+      placeholder="Enter quantity"
+      required
+    >
+  </label>
+
+  <label>
+    Unit
+    <select name="unit" required>
+      <option value="">Select unit</option>
+      <option value="portions">Portions / Servings</option>
+      <option value="kg">Kilograms (kg)</option>
+      <option value="g">Grams (g)</option>
+      <option value="litres">Litres (L)</option>
+      <option value="packets">Packets</option>
+      <option value="trays">Trays</option>
+      <option value="boxes">Boxes</option>
+    </select>
+  </label>
+</div>
+        <label>Food category
+          <select name="category" required>
+            <option value="">Select category</option>
+            <option>Cooked food</option>
+            <option>Packaged food</option>
+            <option>Fresh produce</option>
+            <option>Bakery</option>
+          </select>
+        </label>
+
+        <label>Preparation date and time
+          <input name="preparedAt" type="datetime-local" required>
+        </label>
+
+        <label>Pickup deadline
+          <input name="deadline" type="datetime-local" required>
+        </label>
+
+        <label>Storage information
+          <input name="storage" required maxlength="150">
+        </label>
+
+        <label>Pickup area
+          <input name="location" required maxlength="150">
+        </label>
+
+        <label>Contact person's name
+          <input name="contactName" required maxlength="100">
+        </label>
+
+        <label>Contact phone
+          <input name="phone" type="tel" required>
+        </label>
+
+        <button type="submit">Publish Food Listing</button>
+        <p id="donationMessage" role="status"></p>
+      </form>
+    </section>
+
+    <section id="listings" class="section">
+      <h2>Available Food</h2>
+      <button id="refreshListings" type="button">Refresh</button>
+      <div id="listingGrid">
+        <p>Food listings will appear here.</p>
+      </div>
+    </section>
+    <section id="ngoDashboard" class="section" hidden>
+      <div class="container">
+        <h2>NGO Rescue Dashboard</h2>
+        <p>Available food donations ready for rescue.</p>
+        <div id="ngoListingGrid" class="listing-grid">
+          <p>Loading rescue opportunities...</p>
+        </div>
+        <h2>My Accepted Rescues</h2>
+        <div id="acceptedRescueGrid" class="listing-grid">
+            <p>No accepted donations yet.</p>
+        </div>
+        <h2>Completed Rescues</h2>
+        <div id="completedRescueGrid" class="listing-grid">
+          <p>No completed rescues yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donor Dashboard -->
+    <section id="donorDashboard" class="section" hidden>
+      <div class="container">
+        <h2>My Donor Dashboard</h2>
+        <p>Track your food donations and see how they make a difference.</p>
+
+        <div class="stats">
+          <div>
+            <strong id="donorTotal">0</strong>
+            <span>Total Donations</span>
+          </div>
+          <div>
+            <strong id="donorAvailable">0</strong>
+            <span>Available</span>
+          </div>
+          <div>
+          <strong id="donorInProgress">0</strong>
+            <span>In Progress</span>
+          </div>
+          <div>
+            <strong id="donorCompleted">0</strong>
+            <span>Completed</span>
+          </div                       >
+        </div>
+      </div>
+
+    <h2>My Food Donations</h2>
+
+    <div id="donorDonationGrid" class="listing-grid">
+      <p>Loading your donations...</p>
+    </div>
+
+  </div>
+</section>
+
+  </main>
+  
+
+  <dialog id="authDialog">
+    <h2 id="authTitle">Sign In</h2>
+
+    <form id="authForm">
+      <div id="nameWrap" hidden>
+        <label>Your name
+          <input name="displayName" maxlength="100">
+        </label>
+      </div>
+
+      <div id="roleWrap" hidden>
+        <label>Account type
+          <select name="role">
+            <option value="donor">Food donor</option>
+            <option value="ngo">NGO</option>
+          </select>
+        </label>
+      </div>
+
+      <label>Email
+        <input name="email" type="email" required>
+      </label>
+
+      <label>Password
+        <input name="password" type="password" minlength="8" required>
+      </label>
+
+      <button id="authSubmit" type="submit">Sign In</button>
+      <p id="authMessage" role="status"></p>
+      
+    </form>
+
+    <p>
+      <span id="switchText">New to AnnSetu?</span>
+      <button id="switchAuth" type="button">Create an account</button>
+    </p>
+
+    <button id="authClose" type="button">Close</button>
+  </dialog>
+
+  <footer>
+    <p>AnnSetu — Bridging Food. Ending Hunger.</p>
+    <p>© <span id="year"></span> AnnSetu</p>
+  </footer>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
