@@ -1,0 +1,464 @@
+
+/* ANNSETU - Main Stylesheet */
+
+:root {
+  --green: #176b45;
+  --green-dark: #104d34;
+  --green-light: #e9f5ed;
+  --orange: #f3a43b;
+  --background: #f7faf7;
+  --text: #24352b;
+  --muted: #68766d;
+  --white: #ffffff;
+  --border: #dce7df;
+  --shadow: 0 8px 25px rgba(20, 65, 40, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 7%;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 30px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--green);
+}
+
+button,
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+button:hover,
+.button:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+.hero {
+  padding: 100px 8%;
+  text-align: center;
+  background: linear-gradient(135deg, #e5f4e9, #fdf6e9);
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 65px);
+  line-height: 1.12;
+  color: var(--green-dark);
+  margin-bottom: 22px;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 650px;
+  margin: 0 auto 28px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.section {
+  padding: 65px 8%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section h2 {
+  color: var(--green-dark);
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.section > p {
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.stats div {
+  background: var(--white);
+  padding: 28px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stats strong {
+  display: block;
+  color: var(--green);
+  font-size: 34px;
+}
+
+.stats span {
+  color: var(--muted);
+}
+
+form {
+  background: var(--white);
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  max-width: 700px;
+  margin-top: 25px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 17px;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 15px;
+  background: var(--white);
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #a7d9b8;
+  border-color: var(--green);
+}
+
+#listingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.food-listing {
+  background: var(--white);
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.food-listing h3 {
+  color: var(--green-dark);
+  margin: 14px 0;
+}
+
+.listing-meta {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.listing-actions {
+  margin-top: 18px;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.empty-state {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 10px;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+dialog {
+  width: min(90%, 450px);
+  margin: auto;
+  padding: 28px;
+  border: none;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog h2 {
+  color: var(--green-dark);
+  margin-bottom: 15px;
+}
+
+dialog form {
+  padding: 0;
+  box-shadow: none;
+}
+
+dialog > p {
+  margin-top: 15px;
+}
+
+#authClose {
+  margin-top: 12px;
+  background: #68766d;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: var(--green-dark);
+  color: var(--white);
+  margin-top: 30px;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 70px 6%;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 45px 6%;
+  }
+}
+[hidden] {
+  display: none !important;
+}
+/* AnnSetu Hero Banner */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 45px 5%;
+  background: #f3f8f3;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 420px;
+}
+
+.hero-content h1 {
+  color: #075b3b;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.hero-content p {
+  color: #53665b;
+  line-height: 1.7;
+}
+
+.hero-image {
+  flex: 1.5;
+  width: 60%;
+  max-width: 850px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 25px 5%;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-image {
+    width: 100%;
+  }
+}
+
+/* Student Messages Section */
+.student-messages {
+  padding: 55px 5%;
+  background: #f8faf5;
+}
+
+.student-messages h2 {
+  text-align: center;
+  color: #075b3b;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #68766d;
+  margin-bottom: 35px;
+}
+
+.student-message-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.student-message-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #e0ebdf;
+  box-shadow: 0 8px 25px rgba(20, 80, 50, 0.08);
+}
+
+.student-message-card img {
+  width: 125px;
+  height: 145px;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  border: 3px solid #dcebdc;
+}
+
+.student-message-card h3 {
+  color: #075b3b;
+  margin: 0 0 5px;
+  font-size: 1.2rem;
+}
+
+.student-message-card span {
+  display: inline-block;
+  background: #eaf5e9;
+  color: #176b45;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.student-message-card p {
+  color: #526158;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-top: 14px;
+}
+
+/* Mobile Responsive Layout */
+@media (max-width: 768px) {
+  .student-message-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-message-card {
+    align-items: flex-start;
+    padding: 18px;
+    gap: 15px;
+  }
+
+  .student-message-card img {
+    width: 95px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 420px) {
+  .student-message-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
