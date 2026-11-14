@@ -1,5 +1,5 @@
 
-// ANNSETU - Firebase Authentication and Application
+// SAANJHATHAAL - Firebase Authentication and Application
 
 // Firebase SDK imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
@@ -27,15 +27,7 @@ import {
   runTransaction
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-function escapeHtml(value = "") {
-  return String(value).replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
+
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
@@ -46,7 +38,7 @@ const $ = (id) => document.getElementById(id);
 // Display current year
 $("year").textContent = new Date().getFullYear();
 
-console.log("AnnSetu connected to Firebase!");
+console.log("SaanjhaThaal connected to Firebase!");
 
 // Authentication dialog
 const authDialog = $("authDialog");
@@ -81,8 +73,7 @@ function updateAuthDialog() {
 
   $("switchText").textContent = isRegister
     ? "Already registered?"
-    : "New to AnnSetu?";
-
+    : "New to SaanjhaThaal?";
   $("switchAuth").textContent = isRegister
     ? "Sign In"
     : "Create an account";
@@ -150,7 +141,7 @@ $("authForm").addEventListener("submit", async (event) => {
           ? "Account created! Your NGO verification is pending."
           : "Account created successfully! You are now signed in.";
 
-      console.log("New AnnSetu user registered:", user.uid);
+      console.log("New SaanjhaThaal user registered:", user.uid);
       form.reset();
       isRegister = false;
       updateAuthDialog();
@@ -339,7 +330,7 @@ $("donationForm").addEventListener("submit", async (event) => {
     button.disabled = false;
   }
 });
-// ANNSETU LIVE FOOD BOARD
+// SAANJHATHAAL LIVE FOOD BOARD
 
 const listingGrid = $("listingGrid");
 let unsubscribeFoodBoard = null;
@@ -832,8 +823,8 @@ function loadImpactDashboard() {
     }
   );
 }loadImpactDashboard();
-console.log("AnnSetu Live Food Board initialized.");
-console.log("AnnSetu application initialized successfully.");
+console.log("SaanjhaThaal Live Food Board initialized.");
+console.log("SaanjhaThaal application initialized successfully.");
 $("logoutBtn").addEventListener("click", async () => {
   try {
     await signOut(auth);

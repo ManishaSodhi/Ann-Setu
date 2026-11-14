@@ -1,5 +1,5 @@
 
-/* ANNSETU - Main Stylesheet */
+/* SAANJHATHAAL - Main Stylesheet */
 
 :root {
   --green: #176b45;
@@ -51,6 +51,20 @@ body {
   font-weight: bold;
   color: var(--green);
   text-decoration: none;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-text small {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  color: #6b806f;
 }
 
 .brand-icon {
@@ -313,7 +327,7 @@ footer {
 [hidden] {
   display: none !important;
 }
-/* AnnSetu Hero Banner */
+/* SaanjhaThaal Hero Banner */
 .hero {
   display: flex;
   align-items: center;
